@@ -8,8 +8,10 @@ import { Component,Input } from '@angular/core';
 })
 export class ByCapitalPageComponent {
 
-  //va a recibir algo desde afuera
-  @Input()
-  public pleaceholder:string = '';
 
+
+public searchByCapital( term: string ): void {
+  console.log('Desde ByCapitalPage');
+  console.log({ term });
+}
 }

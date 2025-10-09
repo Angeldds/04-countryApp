@@ -2,4 +2,7 @@
 type="text"
 [placeholder]="pleaceholder"
 class="form-control"
+
+(keyup.enter)="emitValue(txtInput.value)"
+#txtInput
  />
