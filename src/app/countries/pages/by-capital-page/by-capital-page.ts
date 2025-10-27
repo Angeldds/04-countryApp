@@ -15,6 +15,7 @@ export class ByCapitalPageComponent {
   // Esta propiedad pública almacenará la lista de países que se reciba de la API.
   // Se inicializa como un array vacío.
   public countries: Country[] = [];
+  public isLoading: boolean = false;
 
   // El constructor es donde se realiza la inyección de dependencias.
   // Aquí, estamos pidiendo a Angular que nos "inyecte" una instancia del CountriesService.
@@ -24,6 +25,7 @@ export class ByCapitalPageComponent {
   // Este método público se encarga de llamar al servicio para buscar países.
   // Recibe un 'term' (término de búsqueda) que generalmente viene de un input.
   public searchByCapital(term: string): void {
+    this.isLoading = true;
     // Llama al método 'searchCapital' del servicio, pasándole el término de búsqueda.
     // Este método devuelve un Observable, al cual nos tenemos que suscribir.
     this.countriesService.searchCapital(term)
@@ -33,6 +35,7 @@ export class ByCapitalPageComponent {
         // Asignamos los países recibidos a nuestra propiedad local 'this.countries'.
         // Al hacer esto, el HTML se actualizará automáticamente para mostrar la nueva lista.
         this.countries = countries;
+        this.isLoading = false;
       });
   }
 }
