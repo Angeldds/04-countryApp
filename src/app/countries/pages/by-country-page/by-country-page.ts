@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Country } from '../../interfaces/country';
 import { CountriesService } from '../../services/countries.service';
 
@@ -8,16 +8,24 @@ import { CountriesService } from '../../services/countries.service';
   templateUrl: './by-country-page.html',
   styleUrl: './by-country-page.css'
 })
-export class ByCountryPageComponent {
+export class ByCountryPageComponent implements OnInit{
 
     // Esta propiedad pública almacenará la lista de países que se reciba de la API.
     // Se inicializa como un array vacío.
     public countries: Country[] = [];
+    public initialValue: string = '';
+
+
 
     // El constructor es donde se realiza la inyección de dependencias.
     // Aquí, estamos pidiendo a Angular que nos "inyecte" una instancia del CountriesService.
     // 'private' crea automáticamente una propiedad 'this.countriesService' en la clase.
     constructor(private countriesService: CountriesService) { }
+
+    ngOnInit(): void {
+      this.countries = this.countriesService.cacheStore.byCountries.countries;
+      this.initialValue = this.countriesService.cacheStore.byCountries.term;
+    }
 
     // Este método público se encarga de llamar al servicio para buscar países.
     // Recibe un 'term' (término de búsqueda) que generalmente viene de un input.

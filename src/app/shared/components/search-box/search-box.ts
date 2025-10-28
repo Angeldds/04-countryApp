@@ -21,6 +21,10 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
   //creamos un evento que va a emitir algo hacia afuera
   public onValue = new EventEmitter<string>();
 
+  @Input()
+  public initialValue: string = '';
+
+
    @Output()
   //creamos un evento que va a emitir algo hacia afuera
   public onDebounce = new EventEmitter<string>();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Country } from '../../interfaces/country';
 import { CountriesService } from '../../services/countries.service';
 import { Region } from '../../interfaces/region.type';
@@ -10,7 +10,7 @@ import { Region } from '../../interfaces/region.type';
   templateUrl: './by-region-page.html',
   styleUrl: './by-region-page.css'
 })
-export class ByRegionPageComponent {
+export class ByRegionPageComponent implements OnInit{
 
       // Esta propiedad pública almacenará la lista de países que se reciba de la API.
       // Se inicializa como un array vacío.
@@ -23,6 +23,11 @@ export class ByRegionPageComponent {
       // Aquí, estamos pidiendo a Angular que nos "inyecte" una instancia del CountriesService.
       // 'private' crea automáticamente una propiedad 'this.countriesService' en la clase.
       constructor(private countriesService: CountriesService) { }
+
+      ngOnInit(): void {
+        this.countries = this.countriesService.cacheStore.byRegion.countries;
+        this.selectedRegion = this.countriesService.cacheStore.byRegion.region;
+      }
 
       // Este método público se encarga de llamar al servicio para buscar países.
       // Recibe un 'term' (término de búsqueda) que generalmente viene de un input.
